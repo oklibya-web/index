@@ -109,6 +109,93 @@
         
         iframe { width: 100%; height: 100%; border: 0; }
 
+        /* Profile / About Us section */
+        .profile-section {
+            max-width: 1100px;
+            margin: 30px auto 0;
+            padding: 0 20px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 40px 30px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 6px 20px rgba(46,125,50,0.35);
+        }
+
+        .profile-avatar i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .profile-info { flex: 1; }
+
+        .profile-info h2 {
+            color: var(--primary);
+            font-size: 1.7rem;
+            margin: 0 0 10px;
+        }
+
+        .profile-info p {
+            color: #555;
+            line-height: 1.8;
+            margin: 0 0 15px;
+        }
+
+        .profile-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .profile-location i { color: var(--primary); }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge {
+            background: #e8f5e9;
+            color: var(--secondary);
+            border-radius: 50px;
+            padding: 7px 18px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge i { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-location { justify-content: center; }
+            .badges { justify-content: center; }
+        }
+
         footer {
             background: #222;
             color: white;
@@ -124,6 +211,28 @@
     <h1>سوق الطيبات للتسوق</h1>
     <p>الصابرية - الزاوية | ثقتكم هي شعارنا</p>
 </header>
+
+<!-- About Us / Profile Section -->
+<section class="profile-section">
+    <div class="profile-card">
+        <div class="profile-avatar">
+            <i class="fas fa-store"></i>
+        </div>
+        <div class="profile-info">
+            <h2>من نحن</h2>
+            <p>سوق الطيبات للتسوق هو وجهتك المثلى للتسوق اليومي في منطقة الصابرية بالزاوية. نقدم لكم أجود المنتجات الغذائية والاستهلاكية بأسعار تنافسية، مع خدمة مميزة طوال أيام الأسبوع.</p>
+            <div class="profile-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>الصابرية - الزاوية، ليبيا</span>
+            </div>
+            <div class="badges">
+                <span class="badge"><i class="fas fa-star"></i> جودة عالية</span>
+                <span class="badge"><i class="fas fa-tag"></i> أسعار مناسبة</span>
+                <span class="badge"><i class="fas fa-calendar-check"></i> خدمة يومية</span>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div class="container">
     
