@@ -109,6 +109,104 @@
         
         iframe { width: 100%; height: 100%; border: 0; }
 
+        .registration-section {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+        }
+
+        .registration-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 30px;
+        }
+
+        .registration-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+        }
+
+        .form-group .error-msg {
+            color: #d32f2f;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-register:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .success-message i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .success-message h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
         footer {
             background: #222;
             color: white;
@@ -159,9 +257,104 @@
 
 </div>
 
+<div class="registration-section">
+    <div class="registration-card">
+        <h2 class="registration-title"><i class="fas fa-user-plus"></i> تسجيل حساب جديد</h2>
+        <form id="registrationForm" novalidate>
+            <div class="form-group">
+                <label for="fullName">الاسم الكامل</label>
+                <input type="text" id="fullName" placeholder="أدخل اسمك الكامل" required>
+                <div class="error-msg" id="fullNameError">يرجى إدخال الاسم الكامل</div>
+            </div>
+            <div class="form-group">
+                <label for="phone">رقم الهاتف</label>
+                <input type="tel" id="phone" placeholder="مثال: 0911234567" required>
+                <div class="error-msg" id="phoneError">يرجى إدخال رقم هاتف صحيح</div>
+            </div>
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" placeholder="example@email.com" required>
+                <div class="error-msg" id="emailError">يرجى إدخال بريد إلكتروني صحيح</div>
+            </div>
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+                <div class="error-msg" id="passwordError">كلمة المرور يجب أن تكون 6 أحرف على الأقل</div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">تأكيد كلمة المرور</label>
+                <input type="password" id="confirmPassword" placeholder="أعد إدخال كلمة المرور" required>
+                <div class="error-msg" id="confirmPasswordError">كلمات المرور غير متطابقة</div>
+            </div>
+            <button type="submit" class="btn-register"><i class="fas fa-check-circle"></i> تسجيل</button>
+        </form>
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i>
+            <h3>تم التسجيل بنجاح!</h3>
+            <p>شكراً لتسجيلك في سوق الطيبات للتسوق</p>
+        </div>
+    </div>
+</div>
+
 <footer>
     <p>جميع الحقوق محفوظة © 2026 - سوق الطيبات للتسوق</p>
 </footer>
+
+<script>
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var valid = true;
+
+    var fullName = document.getElementById('fullName');
+    var phone = document.getElementById('phone');
+    var email = document.getElementById('email');
+    var password = document.getElementById('password');
+    var confirmPassword = document.getElementById('confirmPassword');
+
+    // Reset errors
+    var errors = document.querySelectorAll('.error-msg');
+    for (var i = 0; i < errors.length; i++) {
+        errors[i].style.display = 'none';
+    }
+
+    // Validate full name
+    if (fullName.value.trim().length < 2) {
+        document.getElementById('fullNameError').style.display = 'block';
+        valid = false;
+    }
+
+    // Validate phone
+    var phonePattern = /^[0-9+]{7,15}$/;
+    if (!phonePattern.test(phone.value.trim())) {
+        document.getElementById('phoneError').style.display = 'block';
+        valid = false;
+    }
+
+    // Validate email
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email.value.trim())) {
+        document.getElementById('emailError').style.display = 'block';
+        valid = false;
+    }
+
+    // Validate password
+    if (password.value.length < 6) {
+        document.getElementById('passwordError').style.display = 'block';
+        valid = false;
+    }
+
+    // Validate confirm password
+    if (password.value !== confirmPassword.value) {
+        document.getElementById('confirmPasswordError').style.display = 'block';
+        valid = false;
+    }
+
+    if (valid) {
+        document.getElementById('registrationForm').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+    }
+});
+</script>
 
 </body>
 </html>
